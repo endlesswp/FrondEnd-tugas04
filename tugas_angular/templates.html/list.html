@@ -1,0 +1,40 @@
+<div class="notes-container">
+    <div class="section-header">
+        <h2 class="title">My Notes</h2>
+        <div class="search-box">
+            <input type="text" 
+                   ng-model="searchText" 
+                   placeholder="Search notes..." 
+                   class="search-input">
+        </div>
+    </div>
+    
+    <div class="empty-state" ng-if="!notes.length">
+        <div class="empty-icon">📝</div>
+        <h3>No Notes Yet</h3>
+        <p>Create your first note by clicking the "New Note" button above.</p>
+    </div>
+
+    <ul class="note-list" ng-if="notes.length">
+        <li class="note-item" ng-repeat="note in notes | filter:searchText">
+            <div class="note-content">
+                <h3 class="note-title">{{note.title}}</h3>
+                <p class="note-preview">{{note.content | limitTo:100}}{{note.content.length > 100 ? '...' : ''}}</p>
+                <div class="note-meta">
+                    <span class="note-date">Created: {{note.date | date:'MMM d, y'}}</span>
+                </div>
+            </div>
+            <div class="note-actions">
+                <a href="#/view/{{$index}}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-eye"></i> View
+                </a>
+                <a href="#/edit/{{$index}}" class="btn btn-success btn-sm">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <button ng-click="deleteNote($index)" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>

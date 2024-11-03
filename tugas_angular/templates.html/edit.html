@@ -1,0 +1,45 @@
+<div class="note-form-container">
+    <div class="form-header">
+        <h2 class="title">Edit Note</h2>
+        <p class="subtitle">Update your note</p>
+    </div>
+
+    <form name="editForm" ng-submit="updateNote()" class="note-form" novalidate>
+        <div class="form-group">
+            <label class="form-label">Title</label>
+            <input type="text" 
+                   name="title"
+                   class="form-input" 
+                   ng-model="note.title" 
+                   required>
+            <div class="form-error" ng-show="editForm.title.$dirty && editForm.title.$invalid">
+                <span ng-show="editForm.title.$error.required">Title is required</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Content</label>
+            <textarea name="content"
+                      class="form-textarea" 
+                      ng-model="note.content" 
+                      rows="8"
+                      required></textarea>
+            <div class="form-error" ng-show="editForm.content.$dirty && editForm.content.$invalid">
+                <span ng-show="editForm.content.$error.required">Content is required</span>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" 
+                    class="btn btn-success"
+                    ng-disabled="editForm.$invalid">
+                <i class="fas fa-save"></i> Update Note
+            </button>
+            <button type="button" 
+                    class="btn btn-secondary"
+                    ng-click="cancel()">
+                <i class="fas fa-times"></i> Cancel
+            </button>
+        </div>
+    </form>
+</div>
